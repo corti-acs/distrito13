@@ -1,2 +1,3 @@
-# distrito13
-Hackaton KSchool using BigQuery ML
+#  distrito13
+TEAM NAME: distrito13
+SCOPE: Hackaton KSchool using BigQuery ML
