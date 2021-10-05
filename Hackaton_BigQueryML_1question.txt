@@ -1,0 +1,5 @@
+#First Question
+
+SELECT color, count(*) 
+FROM `ks-project-acs.movies.movies_table`
+group by color
