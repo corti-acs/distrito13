@@ -1,0 +1,14 @@
+-- Director with best profit, vs dir_fblikes ranking
+SELECT
+director_name,
+MAX(director_facebook_likes) fb_likes,
+SUM(gross) AS tot_gross,
+SUM(budget) AS tot_budget,
+SUM(gross)-SUM(budget) AS tot_profit,
+RANK() OVER (ORDER BY MAX(director_facebook_likes) DESC) AS ranking
+FROM
+`movies-hackaton.movies.movie_dataset`
+GROUP BY
+director_name
+ORDER BY
+tot_profit DESC;

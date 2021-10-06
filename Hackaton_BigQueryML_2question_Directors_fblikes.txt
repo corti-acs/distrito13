@@ -1,0 +1,5 @@
+-- Director and fblikes
+select director_name, max(director_facebook_likes) as fb_likes
+from `movies-hackaton.movies.movie_dataset`
+group by director_name
+order by 2 desc

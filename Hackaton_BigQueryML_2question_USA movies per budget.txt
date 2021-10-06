@@ -1,0 +1,7 @@
+--USA movies per budget
+
+select movie_title, director_name, country, budget
+from `movies-hackaton.movies.movie_dataset`
+where country = 'USA'
+order by budget desc
+limit 10;

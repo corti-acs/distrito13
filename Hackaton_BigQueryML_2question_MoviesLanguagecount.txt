@@ -1,0 +1,6 @@
+-- Movies per language
+
+select language, count(*) as number
+from `movies-hackaton.movies.movie_dataset`
+group by language
+order by count(*) desc;
