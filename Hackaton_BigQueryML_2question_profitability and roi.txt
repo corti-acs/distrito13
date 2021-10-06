@@ -1,0 +1,17 @@
+  -- Profitability ratios and roe
+SELECT
+  movie_title AS title,
+  gross,
+  budget,
+  (gross / (gross + budget)) * 100 AS gross_profit_margin,
+  ((gross / (gross + budget)) * 100) * (1 - 0.15) AS net_profit_margin,
+  ((gross * (1 - 0.15)) / budget) * 100 AS return_on_equity
+FROM
+  'ks-project-acs.movies.movies.table'
+WHERE
+  country = 'USA'
+  AND gross IS NOT NULL
+  AND budget IS NOT NULL
+  AND (gross-budget) > 0
+ORDER BY
+  return_on_equity DESC;

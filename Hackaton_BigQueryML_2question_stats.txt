@@ -1,0 +1,20 @@
+-- Statistics
+SELECT
+  AVG(gross-budget) AS avg_profit,
+  stddev(gross-budget) AS std_profit,
+  APPROX_QUANTILES(gross-budget, 100)[
+OFFSET
+  (25)] AS profit_quantile_1,
+  APPROX_QUANTILES(gross-budget, 100)[
+OFFSET
+  (50)] AS profit_median,
+  APPROX_QUANTILES(gross-budget, 100)[
+OFFSET
+  (75)] AS profit_quantile_3,
+FROM
+  `ks-project-acs.movies.movies_table`
+WHERE
+  country = 'USA'
+  AND gross IS NOT NULL
+  AND budget IS NOT NULL
+  AND (gross-budget) > 0;
