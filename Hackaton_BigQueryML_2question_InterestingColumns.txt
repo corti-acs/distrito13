@@ -1,0 +1,15 @@
+-- Interesting columns
+SELECT
+  movie_title,
+  director_name,
+  LANGUAGE,
+  genres,
+  country,
+  content_rating,
+  gross,
+  budget
+FROM
+  movies-hackaton-328117.movies.movies
+WHERE
+  gross IS NOT NULL
+  AND budget IS NOT NULL ;

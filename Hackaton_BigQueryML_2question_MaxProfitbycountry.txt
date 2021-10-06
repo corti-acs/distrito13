@@ -1,0 +1,26 @@
+-- Max profit by countries
+SELECT
+  country,
+  MAX(profit) AS max_profit,
+FROM (-- Interesting columns
+  SELECT
+    movie_title,
+    director_name,
+    LANGUAGE,
+    genres,
+    country,
+    content_rating,
+    gross,
+    budget,
+    gross-budget AS profit
+  FROM
+    movies-hackaton-328117.movies.movies
+  WHERE
+    gross IS NOT NULL
+    AND budget IS NOT NULL )
+WHERE
+  profit > 0
+GROUP BY
+  country
+ORDER BY
+  max_profit DESC;

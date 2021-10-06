@@ -1,0 +1,13 @@
+  -- Content_rating freq table
+SELECT
+  content_rating AS contente_rating,
+  COUNT(*),
+  MAX(gross-budget) AS profit,
+FROM
+  movies-hackaton-328117.movies.movies
+WHERE
+  gross IS NOT NULL
+  AND budget IS NOT NULL
+  AND content_rating IS NOT NULL
+GROUP BY
+  content_rating;

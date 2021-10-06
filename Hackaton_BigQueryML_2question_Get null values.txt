@@ -1,0 +1,34 @@
+-- Get null values
+
+SELECT
+  COUNT(*) AS tot_values
+  ,SUM(CASE WHEN movie_title IS NULL THEN 1 ELSE 0 END) movie_title
+  ,SUM(CASE WHEN duration IS NULL THEN 1 ELSE 0 END) duration
+  ,SUM(CASE WHEN director_name IS NULL THEN 1 ELSE 0 END) director_name
+  ,SUM(CASE WHEN director_facebook_likes IS NULL THEN 1 ELSE 0 END) director_facebook_likes
+  ,SUM(CASE WHEN actor_1_name IS NULL THEN 1 ELSE 0 END) actor_1_name
+  ,SUM(CASE WHEN actor_1_facebook_likes IS NULL THEN 1 ELSE 0 END) actor_1_facebook_likes
+  ,SUM(CASE WHEN actor_2_name IS NULL THEN 1 ELSE 0 END) actor_2_name
+  ,SUM(CASE WHEN actor_2_facebook_likes IS NULL THEN 1 ELSE 0 END) actor_2_facebook_likes
+  ,SUM(CASE WHEN actor_3_name IS NULL THEN 1 ELSE 0 END) actor_3_name
+  ,SUM(CASE WHEN actor_3_facebook_likes IS NULL THEN 1 ELSE 0 END) actor_3_facebook_likes
+  ,SUM(CASE WHEN num_user_for_reviews IS NULL THEN 1 ELSE 0 END) num_user_for_reviews
+  ,SUM(CASE WHEN num_critic_for_reviews IS NULL THEN 1 ELSE 0 END) num_critic_for_reviews
+  ,SUM(CASE WHEN num_voted_users IS NULL THEN 1 ELSE 0 END) num_voted_users
+  ,SUM(CASE WHEN cast_total_facebook_likes IS NULL THEN 1 ELSE 0 END) cast_total_facebook_likes
+  ,SUM(CASE WHEN movie_facebook_likes IS NULL THEN 1 ELSE 0 END) movie_facebook_likes
+  ,SUM(CASE WHEN plot_keywords IS NULL THEN 1 ELSE 0 END) plot_keywords
+  ,SUM(CASE WHEN facenumber_in_poster IS NULL THEN 1 ELSE 0 END) facenumber_in_poster
+  ,SUM(CASE WHEN color IS NULL THEN 1 ELSE 0 END) color
+  ,SUM(CASE WHEN genres IS NULL THEN 1 ELSE 0 END) genres
+  ,SUM(CASE WHEN title_year IS NULL THEN 1 ELSE 0 END) title_year
+  ,SUM(CASE WHEN language IS NULL THEN 1 ELSE 0 END) language
+  ,SUM(CASE WHEN country IS NULL THEN 1 ELSE 0 END) country
+  ,SUM(CASE WHEN content_rating IS NULL THEN 1 ELSE 0 END) content_rating
+  ,SUM(CASE WHEN aspect_ratio IS NULL THEN 1 ELSE 0 END) aspect_ratio
+  ,SUM(CASE WHEN movie_imdb_link IS NULL THEN 1 ELSE 0 END) movie_imdb_link
+  ,SUM(CASE WHEN gross IS NULL THEN 1 ELSE 0 END) gross
+  ,SUM(CASE WHEN budget IS NULL THEN 1 ELSE 0 END) budget
+  ,SUM(CASE WHEN imdb_score IS NULL THEN 1 ELSE 0 END) imdb_score
+FROM
+  movies-hackaton-328117.movies.movies;
