@@ -1,0 +1,78 @@
+--Creación de la tabla
+
+CREATE OR REPLACE TABLE movies.movie_features AS
+SELECT 
+movie_title,
+movie_facebook_likes,
+director_name,
+director_facebook_likes,
+actor_1_name,
+actor_1_facebook_likes,
+cast_total_facebook_likes,
+gross,
+budget,
+imdb_score,
+Animation, Comedy, Romance, 
+Horror, Scifi, Action,
+Family
+FROM (
+SELECT
+movie_title,
+movie_facebook_likes,
+director_name,
+director_facebook_likes,
+actor_1_name,
+actor_1_facebook_likes,
+cast_total_facebook_likes,
+gross,
+budget,
+imdb_score,
+CASE WHEN CONTAINS_SUBSTR(genres, 'Animation') THEN 1 ELSE 0 END AS Animation,
+CASE WHEN CONTAINS_SUBSTR(genres, 'Comedy') THEN 1 ELSE 0 END AS Comedy,
+CASE WHEN CONTAINS_SUBSTR(genres, 'Romance') THEN 1 ELSE 0 END AS Romance,
+CASE WHEN CONTAINS_SUBSTR(genres, 'Horror') THEN 1 ELSE 0 END AS Horror,
+CASE WHEN CONTAINS_SUBSTR(genres, 'Sci-Fi') THEN 1 ELSE 0 END AS Scifi,
+CASE WHEN CONTAINS_SUBSTR(genres, 'Action') THEN 1 ELSE 0 END AS Action,
+CASE WHEN CONTAINS_SUBSTR(genres, 'Family') THEN 1 ELSE 0 END AS Family,
+ROW_NUMBER() OVER (PARTITION BY movie_title) row_number
+FROM
+`movies-hackaton.movies.movie_dataset`
+WHERE
+movie_title IS NOT NULL
+AND director_name IS NOT NULL
+AND director_facebook_likes IS NOT NULL
+AND actor_1_name IS NOT NULL
+AND actor_1_facebook_likes IS NOT NULL
+AND gross IS NOT NULL
+AND gross <= 300000000
+) WHERE row_number = 1
+
+--modelo
+CREATE OR REPLACE MODEL `movies.top_model_0`
+OPTIONS(model_type='linear_reg',
+data_split_method='AUTO_SPLIT',
+input_label_cols=['gross']) AS
+SELECT
+budget,
+movie_facebook_likes,
+director_facebook_likes,
+actor_1_facebook_likes,
+gross,
+Animation,
+Comedy,
+Romance,
+Horror,
+Scifi,
+Action,
+Family,
+imdb_score
+FROM
+`movies-hackaton.movies.movie_features`
+
+select * from ML.PREDICT(model `movies-hackaton.movies.top_model_0`, 
+(select 
+director_facebook_likes, 
+actor_1_facebook_likes,
+movie_title 
+from `movies-hackaton.movies.movie_features` 
+where movie_title like '%tory%'))
